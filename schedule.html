@@ -139,8 +139,7 @@
     "화요일": ["사2", "수1", "진1", "역사", "사1", "국4", "과3"],
     "수요일": ["사3", "음악", "수1", "영1", "역사", "국2"],
     "목요일": ["실험", "체육", "수2", "진2", "과1", "역사"],
-    "금요일": ["영2", "국3", "사4", "과4", "체육", "창체"]
-  },
+    "금요일": ["영2", "국3", "사4", "과4", "체육", "창체"]},
   "1-3": {
     "월요일": ["자율", "국2", "과3", "실험", "영3", "사4", "역사"],
     "화요일": ["역사", "과1", "음악", "수1", "진1", "국3", "영2"],
@@ -431,6 +430,8 @@
       academicData[month].forEach(event => scheduleHTML += `<li>${event}</li>`);
       scheduleHTML += `</ul>`;
     }
+    container.innerHTML += scheduleHTML;
+    container.innerHTML += layoutHTML;
     container.innerHTML += scheduleHTML;
   </script>
 </body>
