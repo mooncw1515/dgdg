@@ -360,11 +360,14 @@ for (let roomName in offices) {
     };
 
     container.innerHTML += `<h2 class="section-title">학교 전체 배치도</h2>`;
-    for (let floor in layout) {
-      container.innerHTML += `<h3>${floor}</h3><ul>`;
-      layout[floor].forEach(room => container.innerHTML += `<li>${room}</li>`);
-      container.innerHTML += "</ul>";
-    }
+const schoolName = "울산여자고등학교";
+for (let floor in layout[schoolName]) {
+  container.innerHTML += `<h3>${floor}</h3><ul>`;
+  layout[schoolName][floor].forEach(room => {
+    container.innerHTML += `<li>${room}</li>`;
+  });
+  container.innerHTML += "</ul>";
+}
 
     // 학사 일정
     const academic = {
@@ -426,9 +429,10 @@ for (let roomName in offices) {
     };
 
     container.innerHTML += `<h2 class="section-title">학사 일정</h2>`;
-    for (let month in academic["울산여자고등학교 학사 일정"]) {
+const scheduleTitle = "울산여자고등학교 학사 일정";
+for (let month in academic[scheduleTitle]) {
   container.innerHTML += `<h3>${month}</h3><ul>`;
-  academic["울산여자고등학교 학사 일정"][month].forEach(event => {
+  academic[scheduleTitle][month].forEach(event => {
     container.innerHTML += `<li>${event}</li>`;
   });
   container.innerHTML += "</ul>";
