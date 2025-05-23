@@ -1,45 +1,144 @@
-body {
-  background: linear-gradient(135deg, #6b8ce3, #a3bffa);
-  font-family: 'Noto Sans', sans-serif;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ececec, #c3c3c3);
+    color: #333;
+    box-sizing: border-box;
+  }
 
-.login-box {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  width: 320px;
-  text-align: center;
-}
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+  }
 
-.login-box input {
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
+  .container {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    width: 480px;
+    max-width: 95vw;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
 
-.login-box button {
-  width: 100%;
-  padding: 14px;
-  background: #3758ff;
-  border: none;
-  color: white;
-  font-weight: 600;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+  h1 {
+    font-weight: 600;
+    margin-bottom: 32px;
+    font-size: 28px;
+    color: #222;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
 
-.login-box button:hover {
-  background: #243ecb;
-}
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #0078d7;
+    box-shadow: 0 0 8px rgba(0, 120, 215, 0.3);
+    outline: none;
+    background: #fff;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px 0;
+    background: #0078d7;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 120, 215, 0.4);
+    transition: background 0.3s ease;
+    margin-bottom: 15px;
+  }
+
+  button:hover {
+    background: #005a9e;
+  }
+
+  #showSignupBtn {
+    width: auto;
+    padding: 8px 24px;
+    background: transparent;
+    border: 2px solid #0078d7;
+    color: #0078d7;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  #showSignupBtn:hover {
+    background: #0078d7;
+    color: white;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 32px;
+    font-size: 16px;
+    color: #444;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #fafafa;
+  }
+
+  thead tr {
+    background: linear-gradient(90deg, #0078d7, #005a9e);
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+  }
+
+  thead th {
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  tbody td {
+    padding: 12px 12px;
+    background-color: #fff;
+    text-align: center;
+    font-weight: 500;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tbody tr:hover {
+    background-color: #e1f0ff;
+    transition: background-color 0.3s ease;
+  }
+
+  ul.task-list {
+    margin-top: 32px;
+    padding-left: 24px;
+    color: #0078d7;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    list-style-type: disc;
+  }
+</style>
