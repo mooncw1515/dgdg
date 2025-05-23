@@ -433,6 +433,16 @@
     container.innerHTML += scheduleHTML;
     container.innerHTML += layoutHTML;
     container.innerHTML += scheduleHTML;
+    let teacherHTML = `<h2 class="section-title">교무실 자리 배치</h2>`;
+for (const room in teacherTable) {
+  teacherHTML += `<h3>${room}</h3><table class="info-table"><thead><tr><th>부서</th><th>교사 목록</th></tr></thead><tbody>`;
+  for (const department in teacherTable[room]) {
+    const names = teacherTable[room][department].join(", ");
+    teacherHTML += `<tr><td>${department}</td><td>${names}</td></tr>`;
+  }
+  teacherHTML += `</tbody></table>`;
+}
+container.innerHTML += teacherHTML;
   </script>
 </body>
 </html>
