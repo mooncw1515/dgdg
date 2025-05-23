@@ -124,7 +124,7 @@
       window.location.href = 'index.html';
     }
 
-    document.getElementById('classTitle').textContent = `${selectedClass} 반 시간표`;
+    document.getElementById('classTitle').textContent = ${selectedClass} 반 시간표;
 
     const timetable = {
   "1-1": {
@@ -336,9 +336,7 @@
     "목요일": ["심리", "미술", "수탐", "심국", "언4", "여행"],
     "금요일": ["영2", "언3", "생윤", "생과", "심국"]
   }
-};
-
-
+  };
     const tasks = {
       "1-1": ["국어 수행평가: 6월 10일", "수학 수행평가: 7월 15일"],
       "1-2": ["영어 수행평가: 6월 12일"]
@@ -350,18 +348,18 @@
     const maxPeriod = 7;
 
     if (timetable[selectedClass]) {
-      let tableHTML = `<table><thead><tr><th>교시/요일</th>`;
-      days.forEach(day => tableHTML += `<th>${day}</th>`);
-      tableHTML += `</tr></thead><tbody>`;
+      let tableHTML = <table><thead><tr><th>교시/요일</th>;
+      days.forEach(day => tableHTML += <th>${day}</th>);
+      tableHTML += </tr></thead><tbody>;
       for (let i = 0; i < maxPeriod; i++) {
-        tableHTML += `<tr><td>${i + 1}교시</td>`;
+        tableHTML += <tr><td>${i + 1}교시</td>;
         days.forEach(day => {
           const subject = timetable[selectedClass][day]?.[i] || "";
-          tableHTML += `<td>${subject}</td>`;
+          tableHTML += <td>${subject}</td>;
         });
-        tableHTML += `</tr>`;
+        tableHTML += </tr>;
       }
-      tableHTML += `</tbody></table>`;
+      tableHTML += </tbody></table>;
       container.innerHTML += tableHTML;
     } else {
       container.innerHTML += "<p>시간표가 없습니다.</p>";
@@ -369,7 +367,7 @@
 
     if (tasks[selectedClass]) {
       container.innerHTML += "<ul class='task-list'>";
-      tasks[selectedClass].forEach(task => container.innerHTML += `<li>${task}</li>`);
+      tasks[selectedClass].forEach(task => container.innerHTML += <li>${task}</li>);
       container.innerHTML += "</ul>";
     } else {
       container.innerHTML += "<p>수행평가 일정이 없습니다.</p>";
@@ -399,7 +397,7 @@
     "부서명_확인필요": ["박0정", "한0영", "이0인", "주0정", "이0호"],
     "3학년부": ["장0규", "정0우", "박0태", "박0미", "최0정"]
   }
-    };
+  };
     container.innerHTML += teacherTable;
 
     // 학교 전체 배치도
@@ -409,11 +407,11 @@
       "3층":["3학년 교실 (3-1 ~ 3-10)","5교무실","음악실","학생활동실","학생회의실","미술실","미술준비실","학생활동실4"],
       "기타":["체육관","매점","급식실","주차장","운동장"]
     };
-    let layoutHTML = `<h2 class="section-title">학교 전체 배치도</h2>`;
+    let layoutHTML = <h2 class="section-title">학교 전체 배치도</h2>;
     for (const floor in layoutData) {
-      layoutHTML += `<h3>${floor}</h3><ul>`;
-      layoutData[floor].forEach(room => layoutHTML += `<li>${room}</li>`);
-      layoutHTML += `</ul>`;
+      layoutHTML += <h3>${floor}</h3><ul>;
+      layoutData[floor].forEach(room => layoutHTML += <li>${room}</li>);
+      layoutHTML += </ul>;
     }
     container.innerHTML += layoutHTML;
 
@@ -424,25 +422,13 @@
       "8월": ["08.13: 개학일", "08.15: 광복절", "08.29~08.30: 리더십캠프"],
       "12월": ["12.11~12.12: 지필평가", "12.25: 성탄절", "12.31: 겨울방학식"]
     };
-    let scheduleHTML = `<h2 class="section-title">학사 일정</h2>`;
+    let scheduleHTML = <h2 class="section-title">학사 일정</h2>;
     for (const month in academicData) {
-      scheduleHTML += `<h3>${month}</h3><ul>`;
-      academicData[month].forEach(event => scheduleHTML += `<li>${event}</li>`);
-      scheduleHTML += `</ul>`;
+      scheduleHTML += <h3>${month}</h3><ul>;
+      academicData[month].forEach(event => scheduleHTML += <li>${event}</li>);
+      scheduleHTML += </ul>;
     }
     container.innerHTML += scheduleHTML;
-    container.innerHTML += layoutHTML;
-    container.innerHTML += scheduleHTML;
-    let teacherHTML = `<h2 class="section-title">교무실 자리 배치</h2>`;
-for (const room in teacherTable) {
-  teacherHTML += `<h3>${room}</h3><table class="info-table"><thead><tr><th>부서</th><th>교사 목록</th></tr></thead><tbody>`;
-  for (const department in teacherTable[room]) {
-    const names = teacherTable[room][department].join(", ");
-    teacherHTML += `<tr><td>${department}</td><td>${names}</td></tr>`;
-  }
-  teacherHTML += `</tbody></table>`;
-}
-container.innerHTML += teacherHTML;
   </script>
 </body>
 </html>
