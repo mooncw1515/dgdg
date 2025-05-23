@@ -315,7 +315,7 @@
     }
 
     // 교무실 자리
-    container.innerHTML += {
+    const offices = {
   "제 1 교무실 (1층)": {
     "교무운영부": ["김0리", "강0성", "허0정", "김0연", "박0현", "정0현"],
     "방과후부": ["우0순", "김0수", "김0경", "김0주", "장0림", "이0진"],
@@ -339,13 +339,23 @@
     "3학년부": ["장0규", "정0우", "박0태", "박0미", "최0정"]
   }
 };
+    container.innerHTML += `<h2 class="section-title">교무실 배치표</h2>`;
+
+for (let roomName in offices) {
+  container.innerHTML += `<h3>${roomName}</h3>`;
+  const departments = offices[roomName];
+  for (let deptName in departments) {
+    const teachers = departments[deptName].join(", ");
+    container.innerHTML += `<p><strong>${deptName}</strong>: ${teachers}</p>`;
+  }
+}
 
     // 학교 배치도
     const layout = {"울산여자고등학교":{
     "1층":["시청각실", "준비실", "문서고", "학력향상실", "문헌정보실", "실험실장", "진로활동실", "진로진학상담실", "보건실", "특수반", "교장실", "행정실", "분장실", "1교무실", "신발장", "여교사휴게실", "wee클래스"],
     "2층":["1학년 교실 (1-1 ~ 1-10)", "교과교실", "ai융합실", "컴퓨터실", "학생활동실", "화학생물실", "흡연예방교육실"],
     "3층":["3학년 교실 (3-1 ~ 3-10)", "5교무실", "음악실", "학생활동실", "학생회의실", "미술실", "미술준비실", "학생활동실4"],
-    "4층":["3학년 교실 (3-1 ~ 3-10)", "5교무실", "음악실", "학생활동실", "학생회의실", "미술실", "미술준비실", "학생활동실4"]
+    "4층":["3학년 교실 (3-1 ~ 3-10)", "5교무실", "음악실", "학생활동실", "학생회의실", "미술실", "미술준비실", "학생활동실4"],
     "기타":["체육관","매점","급식실","주차장","운동장"]}
     };
 
@@ -416,11 +426,13 @@
     };
 
     container.innerHTML += `<h2 class="section-title">학사 일정</h2>`;
-    for (let month in academic) {
-      container.innerHTML += `<h3>${month}</h3><ul>`;
-      academic[month].forEach(event => container.innerHTML += `<li>${event}</li>`);
-      container.innerHTML += "</ul>";
-    }
+    for (let month in academic["울산여자고등학교 학사 일정"]) {
+  container.innerHTML += `<h3>${month}</h3><ul>`;
+  academic["울산여자고등학교 학사 일정"][month].forEach(event => {
+    container.innerHTML += `<li>${event}</li>`;
+  });
+  container.innerHTML += "</ul>";
+}
   </script>
 </body>
 </html>
