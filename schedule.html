@@ -244,7 +244,7 @@
   "3-6": {
     "월요일": ["자율", "음악", "언1", "일본", "언4", "심국", "사문"],
     "화요일": ["수탐", "생명", "심국", "정보", "사연", "영2"],
-    "수요일": ["사문", "언3", "사연", "영3", "체육", "진로"],
+  	"수요일": ["사문", "언3", "사연", "영3", "체육", "진로"],
     "목요일": ["언2", "수탐", "영4", "생명", "정보", "사연"],
     "금요일": ["영1", "수탐", "사문", "심국", "생명"]
   },
@@ -373,9 +373,10 @@
     container.innerHTML += `<h2 class="section-title">오늘의 학사 일정</h2>`;
 
     const today = new Date();
-    const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0'); // 월 (01~12)
-    const currentDate = today.getDate().toString().padStart(2, '0');     // 일 (01~31)
-    const todayFormatted = `${currentMonth}.${currentDate}`; // 예: "07.09"
+    // 현재 월과 일을 'MM.DD' 형식으로 맞춥니다.
+    const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
+    const currentDate = today.getDate().toString().padStart(2, '0');
+    const todayFormattedForAcademic = `${currentMonth}.${currentDate}`; // 예: "07.09"
 
     const scheduleTitle = "울산여자고등학교 학사 일정";
     let todayAcademicEventsFound = false;
@@ -384,9 +385,9 @@
     for (let monthKey in academic[scheduleTitle]) {
       const eventsInMonth = academic[scheduleTitle][monthKey];
       eventsInMonth.forEach(event => {
-        // 이벤트 문자열에서 날짜 부분 추출 (예: "07.09")
+        // 학사 일정 문자열에서 날짜 부분을 추출하여 'MM.DD' 형식과 비교
         const eventDateMatch = event.match(/^(\d{2}\.\d{2})/);
-        if (eventDateMatch && eventDateMatch[1] === todayFormatted) {
+        if (eventDateMatch && eventDateMatch[1] === todayFormattedForAcademic) {
           academicHtml += `<li>${event}</li>`;
           todayAcademicEventsFound = true;
         }
@@ -422,6 +423,7 @@
     container.innerHTML += `<h2 class="section-title">오늘의 급식</h2>`;
 
     // 현재 날짜를 "M/D" 형식으로 가져오기 (예: "7/9")
+    // padStart는 필요 없고, 월과 일 자체의 숫자만 필요합니다.
     const currentMealDate = `${today.getMonth() + 1}/${today.getDate()}`;
 
     const mealTitle = "7월 급식";
