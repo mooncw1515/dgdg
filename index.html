@@ -156,7 +156,7 @@
                 window.location.href = 'select_subjects.html'; // 2학년 과목 선택 페이지로 이동
             } else {
                 localStorage.removeItem('selectedSubjects'); // 2학년이 아니면 과목 선택 정보 삭제
-                window.location.href = 'info.html'; // 시간표 및 정보 페이지로 이동
+                window.location.href = 'schedule.html'; // 시간표 및 정보 페이지로 이동
             }
         }
 
@@ -180,9 +180,9 @@
                     // 2학년은 선택 과목 페이지로 이동
                     window.location.href = 'select_subjects.html';
                 } else {
-                    // 1학년 또는 3학년은 바로 info.html로 이동
+                    // 1학년 또는 3학년은 바로 schedule.html로 이동
                     localStorage.removeItem('selectedSubjects'); // 혹시 모를 이전 2학년 선택 과목 정보 삭제
-                    window.location.href = 'info.html';
+                    window.location.href = 'schedule.html';
                 }
             } else {
                 alert('아이디 또는 비밀번호가 틀렸습니다.');
