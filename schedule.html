@@ -7,13 +7,13 @@
     <style>
         /* 기본 HTML/Body 스타일 */
         html, body {
-            margin: 0; 
-            padding: 0; 
+            margin: 0;
+            padding: 0;
             height: 100%;
             background: linear-gradient(135deg, #ececec, #c3c3c3); /* 배경 그라데이션 */
             font-family: 'Poppins', sans-serif; /* 폰트 설정 */
-            display: flex; 
-            justify-content: center; 
+            display: flex;
+            justify-content: center;
             align-items: flex-start; /* 상단에서 시작하여 컨텐츠가 아래로 배치되도록 */
             padding: 40px 20px; /* 전체 페이지 패딩 */
             box-sizing: border-box; /* 패딩 포함 크기 계산 */
@@ -29,7 +29,7 @@
             max-width: 90%; /* 최대 너비 설정 (반응형) */
             padding: 40px 30px; /* 내부 패딩 */
             box-sizing: border-box;
-            display: flex; 
+            display: flex;
             flex-direction: column; /* 세로 방향으로 요소 배치 */
             gap: 30px; /* 각 섹션 사이의 간격 */
         }
@@ -96,7 +96,7 @@
 <body>
     <div class="container">
         <h1 id="classTitle">시간표 및 학교 정보</h1>
-        
+
         <div id="schedule">
             <h2 class="section-title">주간 시간표</h2>
         </div>
@@ -117,42 +117,42 @@
     <script>
         // 1. localStorage에서 학년-반 정보와 선택 과목 정보를 안전하게 가져옵니다.
         const selectedClass = localStorage.getItem('selectedClass');
-        const selectedSubjectsJSON = localStorage.getItem('selectedSubjects'); // For 2nd grade
-        const selectedSubjects3rdJSON = localStorage.getItem('selectedSubjects3rd'); // For 3rd grade
+        const selectedSubjectsJSON = localStorage.getItem('selectedSubjects'); // 2학년 선택 과목
+        const selectedSubjects3rdJSON = localStorage.getItem('selectedSubjects3rd'); // 3학년 선택 과목 추가
 
-        let selectedSubjects = {}; // For 2nd grade electives
-        let selectedSubjects3rd = {}; // For 3rd grade electives
+        let selectedSubjects = {};
+        let selectedSubjects3rd = {}; // 3학년 선택 과목 객체 선언
 
-        // Try to parse 2nd grade subjects
+        // selectedSubjectsJSON이 null이 아니고 유효한 JSON 문자열일 경우에만 파싱 (2학년)
         try {
             if (selectedSubjectsJSON) {
                 selectedSubjects = JSON.parse(selectedSubjectsJSON);
             }
         } catch (e) {
             console.error("Error parsing selectedSubjects from localStorage:", e);
-            selectedSubjects = {};
+            selectedSubjects = {}; // 파싱 오류 발생 시 기본값으로 초기화
         }
 
-        // Try to parse 3rd grade subjects
+        // selectedSubjects3rdJSON이 null이 아니고 유효한 JSON 문자열일 경우에만 파싱 (3학년)
         try {
             if (selectedSubjects3rdJSON) {
                 selectedSubjects3rd = JSON.parse(selectedSubjects3rdJSON);
             }
         } catch (e) {
             console.error("Error parsing selectedSubjects3rd from localStorage:", e);
-            selectedSubjects3rd = {};
+            selectedSubjects3rd = {}; // 파싱 오류 발생 시 기본값으로 초기화
         }
 
         // 2. 필수 데이터 (selectedClass)가 없으면 로그인 페이지로 리다이렉트
         if (!selectedClass) {
             alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
-            window.location.href = 'index.html'; 
+            window.location.href = 'index.html';
         }
 
         // 3. 페이지 제목에 학년-반 정보 반영
         document.getElementById("classTitle").textContent = `${selectedClass}반 학교 정보`;
 
-        // --- 시간표 데이터 (2학년 및 3학년 선택 과목 반영) ---
+        // --- 시간표 데이터 (2학년, 3학년 선택 과목 반영) ---
         const timetable = {
             "1-1": {
                 "월요일": ["자율", "역사", "과4", "수1", "사4", "체육", "영3"],
@@ -294,7 +294,7 @@
                 "목요일": ["C", "B", "인공", "일본", "A", "수2"],
                 "금요일": ["B", "문3", "체육", "문4", "일본", "창체"]
             },
-            // 3학년 시간표 데이터 (A, B, C, D가 플레이스홀더)
+            // 3학년 시간표 데이터 (A, B, C, D는 index.html에서 선택한 과목으로 대체될 플레이스홀더)
             "3-1": {
                 "월요일": ["자율", "체육", "영4", "수탐", "보건", "D", "B"],
                 "화요일": ["영3", "A", "D", "보건", "C", "수탐"],
@@ -372,7 +372,8 @@
             "1-1": ["국어 수행평가: 6월 10일", "수학 수행평가: 7월 15일"],
             "1-2": ["영어 수행평가: 7월 20일"],
             "2-1": ["과학 탐구 수행평가: 8월 5일"], // 2학년 수행평가 예시
-            "3-1": ["논술형 평가: 9월 10일", "과학실험 보고서: 10월 5일"], // 3학년 수행평가 예시
+            "3-1": ["수학 심화 과제: 9월 10일", "영어 에세이: 9월 25일"], // 3학년 수행평가 예시
+            // 다른 학급의 수행평가도 여기에 추가
         };
 
         // --- 학사 일정 데이터 ---
@@ -386,7 +387,7 @@
                 ],
                 "7월": [
                     "07.01~07.04: 지필평가",
-                    "07.07~07.09: 수업량유연화주간, 꿈끼탐색주간", 
+                    "07.07~07.09: 수업량유연화주간, 꿈끼탐색주간", // 현재 7월 9일
                     "07.10: 전국연합학력평가 (3학년)/행복어울림과정",
                     "07.14: 학생회 선거 정책 토론",
                     "07.15: 학생회 선거",
@@ -457,7 +458,7 @@
 
         // --- 4. 데이터가 유효할 때만 시간표 출력 로직 실행 ---
         if (selectedClass) {
-            // 주간 시간표 출력 (2학년 및 3학년 선택 과목 반영)
+            // 주간 시간표 출력 (2학년, 3학년 선택 과목 반영)
             if (timetable[selectedClass]) {
                 const days = ["월요일", "화요일", "수요일", "목요일", "금요일"];
                 let html = `<table><thead><tr><th>교시</th>`;
@@ -470,7 +471,8 @@
                     html += `<tr><td>${i+1}교시</td>`;
                     days.forEach(day => {
                         let subject = timetable[selectedClass][day]?.[i] || ""; // 해당 교시 과목 가져오기
-                        
+
+                        // 2학년인 경우, selectedSubjects에 있는 값으로 A, B, C를 대체
                         if (gradeStr === '2' && selectedSubjects) {
                             if (subject === 'A' && selectedSubjects.A) {
                                 subject = selectedSubjects.A;
@@ -479,7 +481,9 @@
                             } else if (subject === 'C' && selectedSubjects.C) {
                                 subject = selectedSubjects.C;
                             }
-                        } else if (gradeStr === '3' && selectedSubjects3rd) { // Apply 3rd grade electives
+                        }
+                        // 3학년인 경우, selectedSubjects3rd에 있는 값으로 A, B, C, D를 대체
+                        else if (gradeStr === '3' && selectedSubjects3rd) {
                             if (subject === 'A' && selectedSubjects3rd.A) {
                                 subject = selectedSubjects3rd.A;
                             } else if (subject === 'B' && selectedSubjects3rd.B) {
@@ -513,13 +517,15 @@
             }
 
         } else {
+            // selectedClass가 없어서 이 블록이 실행될 일은 거의 없지만, 만약을 대비
             scheduleContainer.innerHTML += `<p>시간표를 표시할 학급 정보가 없습니다.</p>`;
             tasksScheduleContainer.innerHTML += `<p>수행평가 일정을 표시할 학급 정보가 없습니다.</p>`;
         }
 
 
         // --- 오늘의 학사 일정 출력 ---
-        const today = new Date(2025, 6, 9); // Set to July 9, 2025 for testing
+        // 현재 날짜는 2025년 7월 9일입니다.
+        const today = new Date();
         const currentMonthPadded = (today.getMonth() + 1).toString().padStart(2, '0');
         const currentDatePadded = today.getDate().toString().padStart(2, '0');
         const todayFormattedForAcademic = `${currentMonthPadded}.${currentDatePadded}`;
@@ -549,6 +555,7 @@
         }
 
         // --- 오늘의 급식 출력 ---
+        // 현재 날짜는 2025년 7월 9일입니다.
         const currentMealDate = `${today.getMonth() + 1}/${today.getDate()}`; // "7/9"
 
         const mealTitle = "7월 급식"; // 급식 데이터의 키
