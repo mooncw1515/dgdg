@@ -2,331 +2,194 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>학교 정보 시스템 로그인</title>
+    <title>학교 시간표 웹 - 로그인 / 회원가입</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <style>
-        body {
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            background: linear-gradient(135deg, #ececec, #c3c3c3);
             font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96); /* 배경 그라데이션 */
-            margin: 0;
             color: #333;
+            display: flex; justify-content: center; align-items: center;
+            user-select: none;
         }
         .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 100%;
-            max-width: 450px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            width: 400px;
+            max-width: 95vw;
+            padding: 40px 30px;
             box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center;
         }
         h1 {
-            color: #4a00e0;
-            margin-bottom: 30px;
+            font-weight: 600;
+            margin-bottom: 32px;
             font-size: 28px;
-            font-weight: 600;
+            color: #222;
+            letter-spacing: 0.05em;
         }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-        select, input[type="text"] {
+        input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
             font-size: 16px;
+            font-weight: 400;
+            border: 1.5px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
             box-sizing: border-box;
-            transition: border-color 0.3s;
         }
-        select:focus, input[type="text"]:focus {
-            border-color: #4a00e0;
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #0078d7;
             outline: none;
-        }
-        .subject-selection {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px dashed #eee;
-        }
-        .subject-selection h2 {
-            font-size: 20px;
-            color: #4a00e0;
-            margin-bottom: 15px;
+            box-shadow: 0 0 8px rgba(0, 120, 215, 0.3);
+            background: #fff;
         }
         button {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #4a00e0, #8e2de2); /* 버튼 그라데이션 */
+            padding: 14px 0;
+            background: #0078d7;
             color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
             font-weight: 600;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 120, 215, 0.4);
+            transition: background 0.3s ease;
+            margin-bottom: 15px;
+            user-select: none;
         }
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 0, 224, 0.4);
+            background: #005a9e;
         }
-        .alert {
+        #showSignupBtn {
+            width: auto;
+            padding: 8px 24px;
+            background: transparent;
+            border: 2px solid #0078d7;
+            color: #0078d7;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+        #showSignupBtn:hover {
+            background: #0078d7;
+            color: white;
+        }
+        #signupForm {
+            display: none;
+            width: 100%;
             margin-top: 20px;
-            padding: 10px;
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
-            display: none; /* 기본적으로 숨김 */
+            flex-direction: column;
+            align-items: center;
+        }
+        #signupForm input {
+            margin-bottom: 16px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>학교 정보 확인</h1>
-        <div class="form-group">
-            <label for="grade-select">학년-반 선택:</label>
-            <select id="grade-select">
-                <option value="">선택하세요</option>
-                <option value="1-1">1학년 1반</option>
-                <option value="1-2">1학년 2반</option>
-                <option value="1-3">1학년 3반</option>
-                <option value="1-4">1학년 4반</option>
-                <option value="1-5">1학년 5반</option>
-                <option value="1-6">1학년 6반</option>
-                <option value="1-7">1학년 7반</option>
-                <option value="1-8">1학년 8반</option>
-                <option value="1-9">1학년 9반</option>
-                <option value="1-10">1학년 10반</option>
-                <option value="2-1">2학년 1반</option>
-                <option value="2-2">2학년 2반</option>
-                <option value="2-3">2학년 3반</option>
-                <option value="2-4">2학년 4반</option>
-                <option value="2-5">2학년 5반</option>
-                <option value="2-6">2학년 6반</option>
-                <option value="2-7">2학년 7반</option>
-                <option value="2-8">2학년 8반</option>
-                <option value="2-9">2학년 9반</option>
-                <option value="2-10">2학년 10반</option>
-                <option value="3-1">3학년 1반</option>
-                <option value="3-2">3학년 2반</option>
-                <option value="3-3">3학년 3반</option>
-                <option value="3-4">3학년 4반</option>
-                <option value="3-5">3학년 5반</option>
-                <option value="3-6">3학년 6반</option>
-                <option value="3-7">3학년 7반</option>
-                <option value="3-8">3학년 8반</option>
-                <option value="3-9">3학년 9반</option>
-                <option value="3-10">3학년 10반</option>
-            </select>
+        <h1>로그인</h1>
+        <input id="loginId" type="text" placeholder="아이디" autocomplete="off" />
+        <input id="loginPw" type="password" placeholder="비밀번호" autocomplete="off" />
+        <button onclick="login()">로그인</button>
+
+        <button id="showSignupBtn" onclick="toggleSignup()">회원가입</button>
+
+        <div id="signupForm">
+            <h1>회원가입</h1>
+            <input id="signupId" type="text" placeholder="아이디" autocomplete="off" />
+            <input id="signupPw" type="password" placeholder="비밀번호" autocomplete="off" />
+            <input id="signupClass" type="text" placeholder="학년-반 (예: 1-3)" autocomplete="off" />
+            <button onclick="signup()">회원가입 완료</button>
         </div>
-
-        <div id="subject-selection-2nd" class="subject-selection" style="display: none;">
-            <h2>2학년 선택 과목</h2>
-            <div class="form-group">
-                <label for="subject-A-2nd">선택 A (진로탐구/인공지능기초/심리학):</label>
-                <select id="subject-A-2nd">
-                    <option value="">선택하세요</option>
-                    <option value="진로탐구">진로탐구</option>
-                    <option value="인공지능기초">인공지능기초</option>
-                    <option value="심리학">심리학</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="subject-B-2nd">선택 B (미술/음악):</label>
-                <select id="subject-B-2nd">
-                    <option value="">선택하세요</option>
-                    <option value="미술">미술</option>
-                    <option value="음악">음악</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="subject-C-2nd">선택 C (중국어회화/일본어회화):</label>
-                <select id="subject-C-2nd">
-                    <option value="">선택하세요</option>
-                    <option value="중국어회화">중국어회화</option>
-                    <option value="일본어회화">일본어회화</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="subject-selection-3rd" class="subject-selection" style="display: none;">
-            <h2>3학년 선택 과목</h2>
-            <div class="form-group">
-                <label for="subject-A-3rd">선택 A (확률과 통계/화학 II/생명과학 II/경제/정치와 법/동아시아사/세계사):</label>
-                <select id="subject-A-3rd">
-                    <option value="">선택하세요</option>
-                    <option value="확률과 통계">확률과 통계</option>
-                    <option value="화학 II">화학 II</option>
-                    <option value="생명과학 II">생명과학 II</option>
-                    <option value="경제">경제</option>
-                    <option value="정치와 법">정치와 법</option>
-                    <option value="동아시아사">동아시아사</option>
-                    <option value="세계사">세계사</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="subject-B-3rd">선택 B (심화영어독해 I/미술 감상과 비평/음악 감상과 비평):</label>
-                <select id="subject-B-3rd">
-                    <option value="">선택하세요</option>
-                    <option value="심화영어독해 I">심화영어독해 I</option>
-                    <option value="미술 감상과 비평">미술 감상과 비평</option>
-                    <option value="음악 감상과 비평">음악 감상과 비평</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="subject-C-3rd">선택 C (물리학 II/지구과학 II/국제 관계와 국제 기구/사회문화/윤리와 사상/여행 지리):</label>
-                <select id="subject-C-3rd">
-                    <option value="">선택하세요</option>
-                    <option value="물리학 II">물리학 II</option>
-                    <option value="지구과학 II">지구과학 II</option>
-                    <option value="국제 관계와 국제 기구">국제 관계와 국제 기구</option>
-                    <option value="사회문화">사회문화</option>
-                    <option value="윤리와 사상">윤리와 사상</option>
-                    <option value="여행 지리">여행 지리</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="subject-D-3rd">선택 D (스포츠 생활/철학/환경):</label>
-                <select id="subject-D-3rd">
-                    <option value="">선택하세요</option>
-                    <option value="스포츠 생활">스포츠 생활</option>
-                    <option value="철학">철학</option>
-                    <option value="환경">환경</option>
-                </select>
-            </div>
-        </div>
-
-        <button id="login-button">정보 확인</button>
-        <div id="alert-message" class="alert"></div>
-
     </div>
 
     <script>
-        const gradeSelect = document.getElementById('grade-select');
-        const subjectSelection2nd = document.getElementById('subject-selection-2nd');
-        const subjectA2nd = document.getElementById('subject-A-2nd');
-        const subjectB2nd = document.getElementById('subject-B-2nd');
-        const subjectC2nd = document.getElementById('subject-C-2nd');
-
-        const subjectSelection3rd = document.getElementById('subject-selection-3rd');
-        const subjectA3rd = document.getElementById('subject-A-3rd');
-        const subjectB3rd = document.getElementById('subject-B-3rd');
-        const subjectC3rd = document.getElementById('subject-C-3rd');
-        const subjectD3rd = document.getElementById('subject-D-3rd');
-
-        const loginButton = document.getElementById('login-button');
-        const alertMessage = document.getElementById('alert-message');
-
-        // 이전에 저장된 값 불러오기
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedClass = localStorage.getItem('selectedClass');
-            if (savedClass) {
-                gradeSelect.value = savedClass;
-                updateSubjectSelectionVisibility();
-            }
-
-            const savedSubjects2nd = JSON.parse(localStorage.getItem('selectedSubjects') || '{}');
-            if (savedSubjects2nd.A) subjectA2nd.value = savedSubjects2nd.A;
-            if (savedSubjects2nd.B) subjectB2nd.value = savedSubjects2nd.B;
-            if (savedSubjects2nd.C) subjectC2nd.value = savedSubjects2nd.C;
-
-            const savedSubjects3rd = JSON.parse(localStorage.getItem('selectedSubjects3rd') || '{}');
-            if (savedSubjects3rd.A) subjectA3rd.value = savedSubjects3rd.A;
-            if (savedSubjects3rd.B) subjectB3rd.value = savedSubjects3rd.B;
-            if (savedSubjects3rd.C) subjectC3rd.value = savedSubjects3rd.C;
-            if (savedSubjects3rd.D) subjectD3rd.value = savedSubjects3rd.D;
-        });
-
-        // 학년-반 선택에 따라 선택 과목 필드 표시/숨기기
-        gradeSelect.addEventListener('change', updateSubjectSelectionVisibility);
-
-        function updateSubjectSelectionVisibility() {
-            const selectedClass = gradeSelect.value;
-            const grade = selectedClass ? selectedClass.split('-')[0] : '';
-
-            subjectSelection2nd.style.display = 'none';
-            subjectSelection3rd.style.display = 'none';
-            alertMessage.style.display = 'none'; // 메시지 숨김
-
-            if (grade === '2') {
-                subjectSelection2nd.style.display = 'block';
-            } else if (grade === '3') {
-                subjectSelection3rd.style.display = 'block';
-            }
+        function toggleSignup() {
+            const form = document.getElementById('signupForm');
+            form.style.display = (form.style.display === 'block') ? 'none' : 'block';
         }
 
-        loginButton.addEventListener('click', () => {
-            const selectedClass = gradeSelect.value;
-            const grade = selectedClass ? selectedClass.split('-')[0] : '';
+        function signup() {
+            const id = document.getElementById('signupId').value.trim();
+            const pw = document.getElementById('signupPw').value.trim();
+            const userClass = document.getElementById('signupClass').value.trim();
 
-            if (!selectedClass) {
-                showAlert('학년-반을 선택해주세요.');
+            if (!id || !pw || !userClass) {
+                alert('아이디, 비밀번호, 학년-반 모두 입력하세요.');
                 return;
             }
 
-            let allSubjectsSelected = true;
-            let selectedSubjects = {}; // 2학년
-            let selectedSubjects3rd = {}; // 3학년
+            // 학년-반 형식 검증 (예: 1-1, 2-5, 3-12)
+            const classPattern = /^[1-3]-\d{1,2}$/;
+            if (!classPattern.test(userClass)) {
+                alert('학년-반 형식이 올바르지 않습니다. (예: 1-3, 2-10, 3-5)');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+            if (users[id]) {
+                alert('이미 존재하는 아이디입니다.');
+                return;
+            }
+
+            users[id] = { password: pw, class: userClass };
+            localStorage.setItem('users', JSON.stringify(users));
+
+            localStorage.setItem('loggedInUser', id);
+            localStorage.setItem('selectedClass', userClass);
+
+            alert('회원가입 완료!');
+
+            const [grade] = userClass.split('-');
 
             if (grade === '2') {
-                if (!subjectA2nd.value || !subjectB2nd.value || !subjectC2nd.value) {
-                    allSubjectsSelected = false;
-                } else {
-                    selectedSubjects = {
-                        A: subjectA2nd.value,
-                        B: subjectB2nd.value,
-                        C: subjectC2nd.value
-                    };
-                    localStorage.setItem('selectedSubjects', JSON.stringify(selectedSubjects));
-                    localStorage.removeItem('selectedSubjects3rd'); // 2학년일 때는 3학년 선택 과목 초기화
-                }
+                window.location.href = 'select_subjects.html';
             } else if (grade === '3') {
-                if (!subjectA3rd.value || !subjectB3rd.value || !subjectC3rd.value || !subjectD3rd.value) {
-                    allSubjectsSelected = false;
-                } else {
-                    selectedSubjects3rd = {
-                        A: subjectA3rd.value,
-                        B: subjectB3rd.value,
-                        C: subjectC3rd.value,
-                        D: subjectD3rd.value
-                    };
-                    localStorage.setItem('selectedSubjects3rd', JSON.stringify(selectedSubjects3rd));
-                    localStorage.removeItem('selectedSubjects'); // 3학년일 때는 2학년 선택 과목 초기화
-                }
-            } else { // 1학년
+                window.location.href = 'select_subjects_3rd.html';
+            } else {
                 localStorage.removeItem('selectedSubjects');
                 localStorage.removeItem('selectedSubjects3rd');
+                window.location.href = 'schedule.html';
             }
+        }
 
+        function login() {
+            const id = document.getElementById('loginId').value.trim();
+            const pw = document.getElementById('loginPw').value.trim();
 
-            if (grade === '2' || grade === '3') {
-                if (!allSubjectsSelected) {
-                    showAlert('선택 과목을 모두 선택해주세요.');
-                    return;
+            let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+            if (users[id] && users[id].password === pw) {
+                localStorage.setItem('loggedInUser', id);
+                const userClass = users[id].class;
+                localStorage.setItem('selectedClass', userClass);
+
+                alert('로그인 성공!');
+
+                const [grade] = userClass.split('-');
+
+                if (grade === '2') {
+                    window.location.href = 'select_subjects.html';
+                } else if (grade === '3') {
+                    window.location.href = 'select_subjects_3rd.html';
+                } else {
+                    localStorage.removeItem('selectedSubjects');
+                    localStorage.removeItem('selectedSubjects3rd');
+                    window.location.href = 'schedule.html';
                 }
+            } else {
+                alert('아이디 또는 비밀번호가 틀렸습니다.');
             }
-
-
-            localStorage.setItem('selectedClass', selectedClass);
-            window.location.href = 'schedule.html'; // 시간표 페이지로 이동
-        });
-
-        function showAlert(message) {
-            alertMessage.textContent = message;
-            alertMessage.style.display = 'block';
         }
     </script>
 </body>
