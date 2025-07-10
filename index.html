@@ -239,25 +239,13 @@
 
 
         function signup() {
-
             const id = document.getElementById('signupId').value.trim();
-
             const pw = document.getElementById('signupPw').value.trim();
-
             const userClass = document.getElementById('signupClass').value.trim();
-
-
-
             if (!id || !pw || !userClass) {
-
                 alert('아이디, 비밀번호, 학년-반 모두 입력하세요.');
-
                 return;
-
             }
-
-
-
             // 학년-반 형식 (예: 1-1, 2-5) 검증 추가
 
             const classPattern = /^[1-3]-\d{1,2}$/; // 1~3학년, 1~2자리 반 숫자
@@ -314,7 +302,7 @@
 
                 localStorage.removeItem('selectedSubjects'); // 2학년이 아니면 과목 선택 정보 삭제
 
-                window.location.href = 'info.html'; // 시간표 및 정보 페이지로 이동
+                window.location.href = 'schedule.html'; // 시간표 및 정보 페이지로 이동
 
             }
 
@@ -362,11 +350,11 @@
 
                 } else {
 
-                    // 1학년 또는 3학년은 바로 info.html로 이동
+                    // 1학년 또는 3학년은 바로 schedule.html로 이동
 
                     localStorage.removeItem('selectedSubjects'); // 혹시 모를 이전 2학년 선택 과목 정보 삭제
 
-                    window.location.href = 'info.html';
+                    window.location.href = 'schedule.html';
 
                 }
 
